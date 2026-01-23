@@ -33,55 +33,66 @@ public class ChatSessionRepository : IChatSessionRepository
     }
 
 
+public async Task<List<ChatSessionListDto>> GetActiveSessions(Guid userId)
+{
+    var sessions = await _context.ChatSessions
+        .Where(s =>
+            s.EndedAt == null &&
+            s.Participants.Any(p => p.UserId == userId)
+        )
+        .Include(s => s.Participants)
+            .ThenInclude(p => p.User)
+        .Include(s => s.Messages)
+        .Select(s => new ChatSessionListDto
+        {
+            SessionId = s.Id,
+            SessionType = s.SessionType,
 
-     public async Task<List<ChatSessionListDto>> GetActiveSessions(Guid userId)
-    {
-        var sessions = await _context.ChatSessions
-            .Where(s => s.IsActive && s.Participants.Any(p => p.UserId == userId))
-            .Include(s => s.Participants)
-                .ThenInclude(p => p.User)
-            .Include(s => s.Messages)
-            .Select(s => new ChatSessionListDto
-            {
-                SessionId = s.Id,
-                SessionType = s.SessionType,
+            OtherUserId = s.Participants
+                .Where(p => p.UserId != userId)
+                .Select(p => p.UserId)
+                .FirstOrDefault(),
 
-                OtherUserId = s.Participants
-                    .Where(p => p.UserId != userId)
-                    .Select(p => p.UserId)
-                    .FirstOrDefault(),
+            OtherUserDisplayName = s.Participants
+                .Where(p => p.UserId != userId)
+                .Select(p =>
+                    p.IsIdentityRevealed
+                        ? p.User.DisplayName
+                        : "Anonymous")
+                .FirstOrDefault(),
 
-                OtherUserDisplayName = s.Participants
-                    .Where(p => p.UserId != userId)
-                    .Select(p => p.User.DisplayName)
-                    .FirstOrDefault(),
+            OtherUserIsAnonymous = s.Participants
+                .Where(p => p.UserId != userId)
+                .Select(p => !p.IsIdentityRevealed)
+                .FirstOrDefault(),
 
-                OtherUserIsAnonymous = s.Participants
-                    .Where(p => p.UserId != userId)
-                    .Select(p => p.User.IsAnonymous)
-                    .FirstOrDefault(),
+            // StartedAt may be 0001-01-01, fallback to CreatedAt
+            CreatedAt = s.StartedAt != DateTime.MinValue
+                            ? s.StartedAt
+                            : s.CreatedAt,
 
-                CreatedAt = s.StartedAt,
-                IsActive = s.IsActive,
-                IsPaused = s.IsPaused,
-                IsEnded = s.EndedAt,
+            IsActive = s.EndedAt == null,
+            IsPaused = s.IsPaused,
 
-                LastMessage = s.Messages
-                    .OrderByDescending(m => m.SentAt)
-                    .Select(m => m.Content)
-                    .FirstOrDefault(),
+            // your DTO expects DateTime?
+            IsEnded = s.EndedAt,
 
-                LastMessageAt = s.Messages
-                    .OrderByDescending(m => m.SentAt)
-                    .Select(m => (DateTime?)m.SentAt)
-                    .FirstOrDefault(),
+            LastMessage = s.Messages
+                .OrderByDescending(m => m.SentAt)
+                .Select(m => m.Content)
+                .FirstOrDefault(),
+
+            LastMessageAt = s.Messages
+                .OrderByDescending(m => m.SentAt)
+                .Select(m => (DateTime?)m.SentAt)
+                .FirstOrDefault(),
+        })
+        .ToListAsync();
+
+    return sessions;
+}
 
 
-            })
-            .ToListAsync();
-
-        return sessions;
-    }
 
 
 

@@ -137,6 +137,10 @@ builder.Services.AddScoped<IChatModerationService, ChatModerationService>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 builder.Services.AddScoped<IAdminUserRepository, AdminUserRepository>();
 builder.Services.AddScoped<IAdminUserService, AdminUserService>();
+builder.Services.AddScoped<IUserChatRequestRepository, UserChatRequestRepository>();
+builder.Services.AddScoped<IUserChatRequestService, UserChatRequestService>();
+
+
 builder.Services.AddSignalR();
 
 

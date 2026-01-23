@@ -64,6 +64,12 @@ public class ExpertInvitationService : IExpertInvitationService
     }
 
 
+      public async Task<List<ExpertSentInvitationDto>> GetSentByExpertAsync(Guid expertId)
+    {
+        return await _inviteRepo.GetSentByExpertAsync(expertId);
+    }
+
+
 public async Task<List<LowMoodUserDto>> GetLowMoodUsersAsync()
 {
     var trends = await _trendRepo.GetLowMoodUsersAsync();

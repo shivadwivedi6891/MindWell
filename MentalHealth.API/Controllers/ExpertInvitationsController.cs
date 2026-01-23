@@ -32,4 +32,19 @@ public async Task<IActionResult> LowMoodUsers()
     return Ok(await _service.GetLowMoodUsersAsync());
 }
 
+
+[Authorize(Roles = "Expert")]
+[HttpGet("sent")]
+public async Task<IActionResult> GetSentInvitations()
+{
+    var expertIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    if (string.IsNullOrWhiteSpace(expertIdStr))
+        return Unauthorized();
+
+    var expertId = Guid.Parse(expertIdStr);
+
+    var result = await _service.GetSentByExpertAsync(expertId);
+
+    return Ok(result);
+}
 }

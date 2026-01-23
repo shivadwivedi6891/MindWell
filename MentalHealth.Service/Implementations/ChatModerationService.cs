@@ -144,12 +144,12 @@ public class ChatModerationService : IChatModerationService
         // 3️⃣ Any participant can end the session (no role-based restrictions)
 
         // 4️⃣ Check if already ended
-        if (!session.IsActive)
-            throw new ArgumentException("Chat session is already ended.");
+       if (session.EndedAt != null)
+        throw new ArgumentException("Session already ended.");
 
-        // 5️⃣ Update session state
-        session.IsActive = false;
-        session.EndedAt = DateTime.UtcNow;
+    // 🔥 END RULE
+    session.EndedAt = DateTime.UtcNow;
+    session.IsPaused = false;
 
         // 6️⃣ Create system message
         var systemMessage = new Message

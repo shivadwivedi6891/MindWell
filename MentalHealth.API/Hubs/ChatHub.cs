@@ -87,8 +87,9 @@ public class ChatHub : Hub
         if (session.IsPaused)
             throw new HubException("Chat is currently paused.");
 
-        if (!session.IsActive)
-            throw new HubException("Chat has been ended.");
+       if (session.EndedAt != null){
+    throw new HubException("Chat has been ended.");
+       }
 
         var msg = new Message
         {
@@ -105,6 +106,7 @@ public class ChatHub : Hub
 
         var payload = new ChatMessageDto
         {
+             MessageId = msg.Id,
             ChatSessionId = chatSessionId,
             SenderId = userId,
             Content = message,

@@ -85,6 +85,44 @@ public class PeerChatService : IPeerChatService
         return (session.Id, true);
     }
 
+
+//------------------
+      public async Task SetChatAvailabilityAsync(Guid userId, bool ready)
+    {
+        await _userRepo.SetReadyToChatAsync(userId, ready);
+    }
+
+
+  public async Task<List<DiscoverUserDto>> GetReadyUsersAsync(Guid currentUserId)
+{
+    var users = await _userRepo.GetReadyUsersAsync(currentUserId);
+
+    var result = new List<DiscoverUserDto>();
+
+    foreach (var user in users)
+    {
+        // 🔒 Skip if already have private chat with this user
+        // var existing = await _userRepo
+        //     .GetByParticipantsAsync(currentUserId, user.Id);
+
+        // if (existing != null)
+        //     continue;
+
+        result.Add(new DiscoverUserDto
+        {
+            UserId = user.Id,
+            DisplayName = user.DisplayName,
+            IsAnonymous = user.IsAnonymous
+        });
+    }
+
+    return result;
+}
+
+
+
+//--------------------------------
+
     public async Task<PeerChatSessionDto?> GetPeerSessionAsync(Guid sessionId, Guid currentUserId)
     {
         var session = await _sessionRepo.GetByIdAsync(sessionId);

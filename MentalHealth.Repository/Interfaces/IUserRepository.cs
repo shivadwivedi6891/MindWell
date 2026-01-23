@@ -8,7 +8,18 @@ public interface IUserRepository
     Task AddAsync(User user);
     Task SaveChangesAsync();
 
+    Task SetReadyToChatAsync(Guid userId, bool ready);
+
+
+
     Task<User?> GetByIdAsync(Guid userId);
+
+Task<List<User>> GetReadyUsersAsync(Guid currentUserId);
+
+
+
+
+
 Task UpdateAsync(User user);
 
 

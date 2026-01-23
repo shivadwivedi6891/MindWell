@@ -2,6 +2,9 @@ using MentalHealth.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using MentalHealth.Shared.DTOs.Chat;
+
+
 
 namespace MentalHealth.API.Controllers;
 

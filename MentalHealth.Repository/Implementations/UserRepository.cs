@@ -32,6 +32,42 @@ public class UserRepository : IUserRepository
 
     }
 
+public async Task GetByParticipantsAsync(Guid userId, bool ready)
+{
+    var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+    if (user == null)
+        throw new Exception("User not found");
+
+    user.ReadyToChat = ready;
+    await _context.SaveChangesAsync();
+}
+
+//---------------
+
+public async Task<List<User>> GetReadyUsersAsync(Guid currentUserId)
+{
+    return await _context.Users
+        .Where(u => u.ReadyToChat == true && u.Id != currentUserId)
+        .ToListAsync();
+}
+
+
+public async Task SetReadyToChatAsync(Guid userId, bool ready)
+{
+    var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+    if (user == null)
+        throw new Exception("User not found");
+
+    user.ReadyToChat = ready;
+    await _context.SaveChangesAsync();
+}
+//------------------
+
+
+
+
     public async Task<User?> GetByIdAsync(Guid userId)
 {
     return await _context.Users.FindAsync(userId);

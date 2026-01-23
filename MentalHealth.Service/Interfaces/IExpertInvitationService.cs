@@ -12,5 +12,8 @@ public interface IExpertInvitationService
     Task AcceptAsync(Guid invitationId, Guid userId);
     Task DeclineAsync(Guid invitationId, Guid userId);
 
+    
+    Task<List<ExpertSentInvitationDto>> GetSentByExpertAsync(Guid expertId); 
+
      Task<ChatSessionCreatedDto> AcceptAndCreateChatAsync(Guid invitationId, Guid userId);
 }

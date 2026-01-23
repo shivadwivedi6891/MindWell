@@ -22,6 +22,7 @@ public class MentalHealthDbContext : DbContext
     public DbSet<ChatReflection> ChatReflections => Set<ChatReflection>();
     public DbSet<ExpertInvitation> ExpertInvitations => Set<ExpertInvitation>();
     public DbSet<MoodTrend> MoodTrends => Set<MoodTrend>();
+    public DbSet<UserChatRequest> UserChatRequests => Set<UserChatRequest>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -83,6 +84,19 @@ public class MentalHealthDbContext : DbContext
             .HasOne(cr => cr.ChatSession)
             .WithMany(cs => cs.Reflections)
             .HasForeignKey(cr => cr.ChatSessionId);
+
+            modelBuilder.Entity<UserChatRequest>()
+    .HasOne(r => r.FromUser)
+    .WithMany()
+    .HasForeignKey(r => r.FromUserId)
+    .OnDelete(DeleteBehavior.Restrict);
+
+modelBuilder.Entity<UserChatRequest>()
+    .HasOne(r => r.ToUser)
+    .WithMany()
+    .HasForeignKey(r => r.ToUserId)
+    .OnDelete(DeleteBehavior.Restrict);
+
 
         modelBuilder.Entity<ChatReflection>()
             .HasOne(cr => cr.User)

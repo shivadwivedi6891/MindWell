@@ -64,6 +64,32 @@ public class PeerChatController : ControllerBase
         }
     }
 
+
+     [HttpPost("availability")]
+    public async Task<IActionResult> SetAvailability([FromBody] SetChatAvailabilityDto dto)
+    {
+        var userId = Guid.Parse(
+            User.FindFirst(ClaimTypes.NameIdentifier)!.Value
+        );
+
+        await _peerChatService.SetChatAvailabilityAsync(userId, dto.ReadyToChat);
+
+        return Ok(new { readyToChat = dto.ReadyToChat });
+    }
+
+    // 2️⃣ GET ALL READY USERS
+    [HttpGet("discover/ready")]
+    public async Task<IActionResult> GetReadyUsers()
+    {
+        var userId = Guid.Parse(
+            User.FindFirst(ClaimTypes.NameIdentifier)!.Value
+        );
+
+        var users = await _peerChatService.GetReadyUsersAsync(userId);
+
+        return Ok(users);
+    }
+
     /// <summary>
     /// Retrieves peer chat session metadata and participant information.
     /// </summary>
