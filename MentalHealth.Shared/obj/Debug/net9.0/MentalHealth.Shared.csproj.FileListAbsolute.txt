@@ -1,0 +1,11 @@
+D:\MoodSupport\MentalHealth.Shared\bin\Debug\net9.0\MentalHealth.Shared.deps.json
+D:\MoodSupport\MentalHealth.Shared\bin\Debug\net9.0\MentalHealth.Shared.dll
+D:\MoodSupport\MentalHealth.Shared\bin\Debug\net9.0\MentalHealth.Shared.pdb
+D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\MentalHealth.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\MentalHealth.Shared.AssemblyInfoInputs.cache
+D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\MentalHealth.Shared.AssemblyInfo.cs
+D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\MentalHealth.Shared.csproj.CoreCompileInputs.cache
+D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\MentalHealth.Shared.dll
+D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\refint\MentalHealth.Shared.dll
+D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\MentalHealth.Shared.pdb
+D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\ref\MentalHealth.Shared.dll

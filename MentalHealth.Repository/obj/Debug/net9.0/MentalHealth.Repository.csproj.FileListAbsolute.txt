@@ -1,0 +1,17 @@
+D:\MoodSupport\MentalHealth.Repository\bin\Debug\net9.0\MentalHealth.Repository.deps.json
+D:\MoodSupport\MentalHealth.Repository\bin\Debug\net9.0\MentalHealth.Repository.runtimeconfig.json
+D:\MoodSupport\MentalHealth.Repository\bin\Debug\net9.0\MentalHealth.Repository.dll
+D:\MoodSupport\MentalHealth.Repository\bin\Debug\net9.0\MentalHealth.Repository.pdb
+D:\MoodSupport\MentalHealth.Repository\bin\Debug\net9.0\MentalHealth.Shared.dll
+D:\MoodSupport\MentalHealth.Repository\bin\Debug\net9.0\MentalHealth.Shared.pdb
+D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\MentalHealth.Repository.csproj.AssemblyReference.cache
+D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\MentalHealth.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\MentalHealth.Repository.AssemblyInfoInputs.cache
+D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\MentalHealth.Repository.AssemblyInfo.cs
+D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\MentalHealth.Repository.csproj.CoreCompileInputs.cache
+D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\MentalHe.87A73EA8.Up2Date
+D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\MentalHealth.Repository.dll
+D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\refint\MentalHealth.Repository.dll
+D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\MentalHealth.Repository.pdb
+D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\MentalHealth.Repository.genruntimeconfig.cache
+D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\ref\MentalHealth.Repository.dll
