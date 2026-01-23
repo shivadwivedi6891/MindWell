@@ -9,3 +9,4 @@ D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\MentalHealth.Shared.dll
 D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\refint\MentalHealth.Shared.dll
 D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\MentalHealth.Shared.pdb
 D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\ref\MentalHealth.Shared.dll
+D:\MoodSupport\MentalHealth.Shared\obj\Debug\net9.0\MentalHealth.Shared.sourcelink.json

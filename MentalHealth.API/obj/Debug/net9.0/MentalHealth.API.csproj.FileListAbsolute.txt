@@ -164,3 +164,4 @@ D:\MoodSupport\MentalHealth.API\bin\Debug\net9.0\Microsoft.AspNetCore.Http.Conne
 D:\MoodSupport\MentalHealth.API\bin\Debug\net9.0\Microsoft.AspNetCore.SignalR.Client.dll
 D:\MoodSupport\MentalHealth.API\bin\Debug\net9.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
 D:\MoodSupport\MentalHealth.API\bin\Debug\net9.0\System.Net.ServerSentEvents.dll
+D:\MoodSupport\MentalHealth.API\obj\Debug\net9.0\MentalHealth.API.sourcelink.json

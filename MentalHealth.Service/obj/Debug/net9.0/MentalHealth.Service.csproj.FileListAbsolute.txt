@@ -15,3 +15,4 @@ D:\MoodSupport\MentalHealth.Service\obj\Debug\net9.0\MentalHealth.Service.dll
 D:\MoodSupport\MentalHealth.Service\obj\Debug\net9.0\refint\MentalHealth.Service.dll
 D:\MoodSupport\MentalHealth.Service\obj\Debug\net9.0\MentalHealth.Service.pdb
 D:\MoodSupport\MentalHealth.Service\obj\Debug\net9.0\ref\MentalHealth.Service.dll
+D:\MoodSupport\MentalHealth.Service\obj\Debug\net9.0\MentalHealth.Service.sourcelink.json

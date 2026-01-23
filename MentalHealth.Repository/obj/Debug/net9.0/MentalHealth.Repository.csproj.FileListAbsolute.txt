@@ -15,3 +15,4 @@ D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\refint\MentalHealth.Repo
 D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\MentalHealth.Repository.pdb
 D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\MentalHealth.Repository.genruntimeconfig.cache
 D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\ref\MentalHealth.Repository.dll
+D:\MoodSupport\MentalHealth.Repository\obj\Debug\net9.0\MentalHealth.Repository.sourcelink.json
