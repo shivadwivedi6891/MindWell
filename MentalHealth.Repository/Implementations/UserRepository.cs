@@ -48,7 +48,12 @@ public async Task GetByParticipantsAsync(Guid userId, bool ready)
 public async Task<List<User>> GetReadyUsersAsync(Guid currentUserId)
 {
     return await _context.Users
-        .Where(u => u.ReadyToChat == true && u.Id != currentUserId)
+        .Where(u => u.ReadyToChat == true 
+            && u.Id != currentUserId
+            && !_context.UserChatRequests.Any(cr => 
+                cr.FromUserId == currentUserId 
+                && cr.ToUserId == u.Id 
+                && cr.Status == "Pending"))
         .ToListAsync();
 }
 

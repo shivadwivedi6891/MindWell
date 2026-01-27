@@ -26,12 +26,12 @@ public class ExpertInvitationsController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("low-mood-users")]
+  [HttpGet("low-mood-users")]
 public async Task<IActionResult> LowMoodUsers()
 {
-    return Ok(await _service.GetLowMoodUsersAsync());
+    var expertId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+    return Ok(await _service.GetLowMoodUsersAsync(expertId));
 }
-
 
 [Authorize(Roles = "Expert")]
 [HttpGet("sent")]

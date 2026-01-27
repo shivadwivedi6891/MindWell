@@ -20,7 +20,7 @@ public class UserChatRequestsController : ControllerBase
         _service = service;
     }
 
-    // 
+  
     [HttpPost]
     public async Task<IActionResult> Send([FromBody] SendChatRequestDto dto)
     {
@@ -80,7 +80,7 @@ public class UserChatRequestsController : ControllerBase
 
         var result = await _service.AcceptAsync(id, userId);
 
-        return Ok(result);   // returns sessionId
+        return Ok(result);  
     }
 
     // 4️⃣ Reject

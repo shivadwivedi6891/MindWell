@@ -20,6 +20,8 @@ public interface IPeerChatService
 Task SetChatAvailabilityAsync(Guid userId, bool ready);
 Task<List<DiscoverUserDto>> GetReadyUsersAsync(Guid currentUserId);
 
+//  Task<bool> ToggleChatAvailabilityAsync(Guid userId);
+
 
     /// <summary>
     /// Retrieves paginated message history for a peer chat session

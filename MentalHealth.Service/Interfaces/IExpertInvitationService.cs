@@ -7,7 +7,7 @@ public interface IExpertInvitationService
 {
     Task SendInviteAsync(Guid expertId, ExpertInviteCreateDto dto);
     Task<List<ExpertInvitationResponseDto>> GetUserInvitesAsync(Guid userId);
-    Task<List<LowMoodUserDto>> GetLowMoodUsersAsync();
+    Task<List<LowMoodUserDto>> GetLowMoodUsersAsync(Guid currentUserId);
 
     Task AcceptAsync(Guid invitationId, Guid userId);
     Task DeclineAsync(Guid invitationId, Guid userId);

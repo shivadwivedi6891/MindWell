@@ -10,6 +10,8 @@ public interface IUserRepository
 
     Task SetReadyToChatAsync(Guid userId, bool ready);
 
+ 
+
 
 
     Task<User?> GetByIdAsync(Guid userId);

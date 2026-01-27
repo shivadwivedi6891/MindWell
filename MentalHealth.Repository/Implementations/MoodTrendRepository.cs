@@ -39,10 +39,14 @@ public class MoodTrendRepository : IMoodTrendRepository
     }
 
 
-public async Task<List<MoodTrend>> GetLowMoodUsersAsync()
+public async Task<List<MoodTrend>> GetLowMoodUsersAsync(Guid currentUserId)
 {
     return await _context.MoodTrends
-        .Where(t => t.IsLow)
+        .Where(t => t.IsLow
+            && !_context.UserChatRequests.Any(cr =>
+                cr.FromUserId == currentUserId
+                && cr.ToUserId == t.UserId
+                && cr.Status == "Pending"))
         .OrderBy(t => t.AverageScore)
         .ToListAsync();
 }

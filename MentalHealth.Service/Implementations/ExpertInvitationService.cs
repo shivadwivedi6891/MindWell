@@ -70,9 +70,9 @@ public class ExpertInvitationService : IExpertInvitationService
     }
 
 
-public async Task<List<LowMoodUserDto>> GetLowMoodUsersAsync()
+public async Task<List<LowMoodUserDto>> GetLowMoodUsersAsync(Guid currentUserId)
 {
-    var trends = await _trendRepo.GetLowMoodUsersAsync();
+    var trends = await _trendRepo.GetLowMoodUsersAsync(currentUserId);
 
     return trends.Select(t => new LowMoodUserDto
     {

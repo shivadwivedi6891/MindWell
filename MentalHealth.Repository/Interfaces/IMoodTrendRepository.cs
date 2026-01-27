@@ -12,7 +12,7 @@ public interface IMoodTrendRepository
 
     Task<List<MoodTrend>> GetByUserAsync(Guid userId);
 
-    Task<List<MoodTrend>> GetLowMoodUsersAsync();
+    Task<List<MoodTrend>> GetLowMoodUsersAsync(Guid currentUserId);
 
 
     Task SaveChangesAsync();
