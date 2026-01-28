@@ -4,14 +4,10 @@ using MentalHealth.Repository.Interfaces;
 using MentalHealth.Service.Implementations;
 using MentalHealth.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using MentalHealth.API.Hubs;
-
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,18 +54,30 @@ builder.Services.AddDbContext<MentalHealthDbContext>(options =>
     )
 );
 
-// CORS (safe default for development, tighten for production)
+
+
+// =====================
+// 🔴 CORS — FIXED FOR SIGNALR + JWT
+// =====================
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("CorsPolicy", policy =>
     {
         policy
-            .AllowAnyOrigin()
+            .WithOrigins("http://localhost:5173")   // 🔥 React dev origin ONLY
             .AllowAnyHeader()
-            .AllowAnyMethod()
-            .SetIsOriginAllowedToAllowWildcardSubdomains();
+            .AllowAnyMethod();
+            // ❌ NO AllowAnyOrigin
+            // ❌ NO AllowCredentials (we use JWT, not cookies)
     });
 });
+
+
+
+// =====================
+// JWT Authentication (SignalR compatible)
+// =====================
 
 builder.Services.AddAuthentication(options =>
 {
@@ -94,15 +102,17 @@ builder.Services.AddAuthentication(options =>
         )
     };
 
-      options.Events = new JwtBearerEvents
+    // 🔥 IMPORTANT — allow JWT in SignalR query string
+    options.Events = new JwtBearerEvents
     {
         OnMessageReceived = context =>
         {
             var accessToken = context.Request.Query["access_token"];
-
             var path = context.HttpContext.Request.Path;
+
             if (!string.IsNullOrEmpty(accessToken) &&
-                path.StartsWithSegments("/hubs/chat"))
+                (path.StartsWithSegments("/hubs/chat") ||
+                 path.StartsWithSegments("/hubs/groupChat")))
             {
                 context.Token = accessToken;
             }
@@ -114,7 +124,9 @@ builder.Services.AddAuthentication(options =>
 
 
 
-
+// =====================
+// Dependency Injection
+// =====================
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -140,11 +152,13 @@ builder.Services.AddScoped<IAdminUserService, AdminUserService>();
 builder.Services.AddScoped<IUserChatRequestRepository, UserChatRequestRepository>();
 builder.Services.AddScoped<IUserChatRequestService, UserChatRequestService>();
 
+// Group Chat
+builder.Services.AddScoped<IGroupSessionRepository, GroupSessionRepository>();
+builder.Services.AddScoped<IGroupParticipantRepository, GroupParticipantRepository>();
+builder.Services.AddScoped<IGroupTopicRepository, GroupTopicRepository>();
+builder.Services.AddScoped<IGroupChatService, GroupChatService>();
 
 builder.Services.AddSignalR();
-
-
-
 
 
 
@@ -153,6 +167,8 @@ builder.Services.AddSignalR();
 // =====================
 
 var app = builder.Build();
+
+
 
 // =====================
 // Middleware pipeline
@@ -164,19 +180,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// app.UseHttpsRedirection();
-
-// CORS must come before routing
-app.UseCors("AllowAll");
+// 🔴 ORDER IS CRITICAL FOR SIGNALR
 
 app.UseRouting();
+
+app.UseCors("CorsPolicy");   // 🔥 MUST BE BEFORE AUTH & HUBS
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-
 app.MapControllers();
-app.MapHub<ChatHub>("/hubs/chat");
 
+// SignalR hubs
+app.MapHub<ChatHub>("/hubs/chat");
+app.MapHub<GroupChatHub>("/hubs/groupChat");
 
 app.Run();

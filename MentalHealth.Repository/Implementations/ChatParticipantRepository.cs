@@ -31,6 +31,27 @@ public class ChatParticipantRepository : IChatParticipantRepository
             .ToListAsync();
     }
 
+    public async Task<ChatParticipant?> GetByChatSessionAndUserAsync(Guid chatSessionId, Guid userId)
+    {
+        return await _context.ChatParticipants
+            .FirstOrDefaultAsync(cp => cp.ChatSessionId == chatSessionId && cp.UserId == userId);
+    }
+
+    public Task UpdateAsync(ChatParticipant participant)
+    {
+        _context.ChatParticipants.Update(participant);
+        return Task.CompletedTask;
+    }
+
+    public async Task DeleteAsync(Guid participantId)
+    {
+        var participant = await _context.ChatParticipants.FindAsync(participantId);
+        if (participant != null)
+        {
+            _context.ChatParticipants.Remove(participant);
+        }
+    }
+
     public async Task SaveChangesAsync()
     {
         await _context.SaveChangesAsync();
